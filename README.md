@@ -1,4 +1,6 @@
-# ToL Log Templater
+# Throne of Lies Log Templater
+
+https://www.throneoflies.com/
 
 Very early release.
 
