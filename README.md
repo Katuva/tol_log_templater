@@ -10,4 +10,4 @@ When you want to use your template, select it from the dropdown in the main wind
 
 ## License
 
-See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
+See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
