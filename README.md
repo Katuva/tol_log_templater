@@ -8,6 +8,8 @@ To use, run the application, click new to create a new log template, give it a n
 
 When you want to use your template, select it from the dropdown in the main window, make sure the game is running and the desired log page is selected, then click either page1 or page2.
 
+To download the latest release, click [here](https://github.com/Katuva/tol_log_templater/releases/latest) currently only available for Windows.
+
 ## License
 
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
