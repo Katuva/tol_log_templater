@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ToL_Log_Templater
 {
@@ -80,6 +69,10 @@ namespace ToL_Log_Templater
                 writer.WriteLine(txtPage2.Text);
                 writer.WriteLine("###PAGE2_END###");
             }
+
+            // This is nasty, temporary until I can be bothered to create proper models/event/mvvm crap.
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.Templates.Add(new Template(id.ToString(), txtTemplateName.Text, txtPage1.Text, txtPage2.Text));
 
             this.Close();
         }

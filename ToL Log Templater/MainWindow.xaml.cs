@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -14,7 +15,7 @@ namespace ToL_Log_Templater
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<Template> Templates { get; set; }
+        public ObservableCollection<Template> Templates { get; set; }
 
         public MainWindow()
         {
@@ -37,9 +38,9 @@ namespace ToL_Log_Templater
             return IntPtr.Zero;
         }
 
-        private void LoadTemplates()
+        public void LoadTemplates()
         {
-            Templates = new List<Template>();
+            Templates = new ObservableCollection<Template>();
 
             foreach (string file in Directory.EnumerateFiles("templates"))
             {
@@ -61,7 +62,7 @@ namespace ToL_Log_Templater
             }
         }
 
-        private void FocusGame()
+        private bool FocusGame()
         {
             IntPtr iPtrHwnd;
 
@@ -70,35 +71,43 @@ namespace ToL_Log_Templater
             if (iPtrHwnd == IntPtr.Zero)
             {
                 System.Windows.MessageBox.Show("Throne of Lies doesn't appear to be running.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
+                return false;
             }
 
             SetForegroundWindow(iPtrHwnd);
+            return true;
         }
 
         private void PasteTemplate(string page)
         {
             Template template = (Template)cmbTemplates.SelectedItem;
 
-            switch (page)
+            if (template != null)
             {
-                case "page1":
-                    System.Windows.Clipboard.SetText(template.Page1);
-                    break;
-                case "page2":
-                    System.Windows.Clipboard.SetText(template.Page2);
-                    break;
-                default:
-                    break;
-            }
+                switch (page)
+                {
+                    case "page1":
+                        System.Windows.Clipboard.SetText(template.Page1);
+                        break;
+                    case "page2":
+                        System.Windows.Clipboard.SetText(template.Page2);
+                        break;
+                    default:
+                        break;
+                }
 
-            SendKeys.SendWait("^{v}");
+                SendKeys.SendWait("^{v}");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Please select a template from the list.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private void btnPage1_Click(object sender, RoutedEventArgs e)
         {
-            FocusGame();
-            PasteTemplate("page1");
+            if (FocusGame())
+                PasteTemplate("page1");
         }
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
@@ -110,8 +119,8 @@ namespace ToL_Log_Templater
 
         private void btnPage2_Click(object sender, RoutedEventArgs e)
         {
-            FocusGame();
-            PasteTemplate("page2");
+            if (FocusGame())
+                PasteTemplate("page2");
         }
     }
 }

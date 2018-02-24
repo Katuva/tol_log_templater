@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToL_Log_Templater
+﻿namespace ToL_Log_Templater
 {
     public class Template
     {
