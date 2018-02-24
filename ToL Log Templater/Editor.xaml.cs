@@ -72,7 +72,7 @@ namespace ToL_Log_Templater
 
             // This is nasty, temporary until I can be bothered to create proper models/event/mvvm crap.
             var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.Templates.Add(new Template(id.ToString(), txtTemplateName.Text, txtPage1.Text, txtPage2.Text));
+            mainWindow.Templates.Add(new Template("templates\\" + id.ToString(), txtTemplateName.Text, txtPage1.Text, txtPage2.Text));
 
             this.Close();
         }

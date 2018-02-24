@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="Editor" Height="597.213" Width="1130.05" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" SourceInitialized="Window_SourceInitialized" Loaded="Window_Loaded">
     <Grid Background="#FF2D2D30">
-        <TextBox x:Name="txtTemplateName" Margin="109,10,10,0" TextWrapping="Wrap" Height="23" VerticalAlignment="Top" GotFocus="txtTemplateName_GotFocus" Background="#FF434347" Foreground="#FF939E99" BorderBrush="#FF1E1E1F"/>
-        <Label x:Name="label" Content="Template name:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Foreground="#FF9E9E9E"/>
-        <Grid Margin="10,47,10,43">
+        <TextBox x:Name="txtTemplateName" Margin="137,10,10,0" TextWrapping="Wrap" Height="38" VerticalAlignment="Top" VerticalContentAlignment="Center" GotFocus="txtTemplateName_GotFocus" Background="#FF434347" Foreground="#FF939E99" BorderBrush="#FF1E1E1F" FontFamily="{DynamicResource Overlock}" FontSize="18"/>
+        <Label x:Name="label" Content="Template name:" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Foreground="#FF9E9E9E" FontFamily="{DynamicResource Overlock}" FontSize="18"/>
+        <Grid Margin="10,53,10,66">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -17,8 +17,8 @@
             <TextBox x:Name="txtPage1" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Margin="0,0,5,0" Background="#FF434347" Foreground="#FF939E99" FontFamily="{StaticResource Overlock}" FontSize="20" BorderBrush="#FF1E1E1F" AcceptsReturn="True"/>
             <TextBox x:Name="txtPage2" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="5,0,0,0" TextWrapping="Wrap" Background="#FF434347" Foreground="#FF939E99" FontFamily="{StaticResource Overlock}" FontSize="20" BorderBrush="#FF1E1E1F" AcceptsReturn="True"/>
         </Grid>
-        <Button x:Name="btnCancel" Content="Cancel" Margin="0,0,10,13" HorizontalAlignment="Right" Width="75" Height="18" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
-        <Button x:Name="btnSave" Content="Save" Margin="0,0,90,13" HorizontalAlignment="Right" Width="75" Height="18" VerticalAlignment="Bottom" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" Margin="0,0,10,13" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
+        <Button x:Name="btnSave" Content="Save" Margin="0,0,131,13" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
 
     </Grid>
 </Window>

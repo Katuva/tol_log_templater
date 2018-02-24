@@ -52,11 +52,11 @@ namespace ToL_Log_Templater
 
                 regex = new Regex("###PAGE1_START###(.+?)###PAGE1_END###", RegexOptions.Singleline);
                 match = regex.Match(contents);
-                string page1 = match.Groups[1].Value.Trim();
+                string page1 = match.Groups[1].Value.Trim(Environment.NewLine.ToCharArray());
 
                 regex = new Regex("###PAGE2_START###(.+?)###PAGE2_END###", RegexOptions.Singleline);
                 match = regex.Match(contents);
-                string page2 = match.Groups[1].Value.Trim();
+                string page2 = match.Groups[1].Value.Trim(Environment.NewLine.ToCharArray());
 
                 Templates.Add(new Template(file, name, page1, page2));
             }
@@ -80,27 +80,38 @@ namespace ToL_Log_Templater
 
         private void PasteTemplate(string page)
         {
+            Template template = CheckTemplateSelected();
+
+            if (template == null)
+                return;
+            
+            switch (page)
+            {
+                case "page1":
+                    System.Windows.Clipboard.SetText(template.Page1);
+                    break;
+                case "page2":
+                    System.Windows.Clipboard.SetText(template.Page2);
+                    break;
+                default:
+                    break;
+            }
+
+            SendKeys.SendWait("^{v}");
+        }
+
+        private Template CheckTemplateSelected()
+        {
             Template template = (Template)cmbTemplates.SelectedItem;
 
             if (template != null)
             {
-                switch (page)
-                {
-                    case "page1":
-                        System.Windows.Clipboard.SetText(template.Page1);
-                        break;
-                    case "page2":
-                        System.Windows.Clipboard.SetText(template.Page2);
-                        break;
-                    default:
-                        break;
-                }
-
-                SendKeys.SendWait("^{v}");
+                return template;
             }
             else
             {
                 System.Windows.MessageBox.Show("Please select a template from the list.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return null;
             }
         }
 
@@ -121,6 +132,22 @@ namespace ToL_Log_Templater
         {
             if (FocusGame())
                 PasteTemplate("page2");
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Template template = CheckTemplateSelected();
+
+            if (template == null)
+                return;
+
+            MessageBoxResult dialogResult = System.Windows.MessageBox.Show("Are you sure you want to delete " + template.Name + "?", "Confirm delete...", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                File.Delete(template.Filename);
+                Templates.Remove((Template)cmbTemplates.SelectedItem);
+            }
         }
     }
 }
