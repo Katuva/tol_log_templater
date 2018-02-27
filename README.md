@@ -14,10 +14,6 @@ When you want to use your template, select it from the dropdown in the main wind
 
 To download the latest release, click [here](https://github.com/Katuva/tol_log_templater/releases/latest), and download the latest zip file. Currently only available for Windows.
 
-Roadmap:
-
-- Unicode character selecter/inserter.
-
 ## License
 
 See the [LICENSE](LICENSE) file for license rights and limitations (MIT).

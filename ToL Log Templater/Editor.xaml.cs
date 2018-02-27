@@ -115,5 +115,13 @@ namespace ToL_Log_Templater
             else
                 txtPage1.Focus();
         }
+
+        private void btnUnicode_Click(object sender, RoutedEventArgs e)
+        {
+            Unicode unicodeWindow = new Unicode();
+            unicodeWindow.Owner = this;
+
+            unicodeWindow.Show();
+        }
     }
 }

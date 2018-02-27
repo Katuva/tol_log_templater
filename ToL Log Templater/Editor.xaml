@@ -19,6 +19,7 @@
         </Grid>
         <Button x:Name="btnCancel" Content="Cancel" Margin="0,0,10,13" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnCancel_Click"/>
         <Button x:Name="btnSave" Content="Save" Margin="0,0,131,13" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnSave_Click"/>
+        <Button x:Name="btnUnicode" Content="Unicode Picker" HorizontalAlignment="Left" Margin="10,0,0,13" Width="144" Click="btnUnicode_Click" Height="38" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
