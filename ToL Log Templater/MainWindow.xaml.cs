@@ -31,7 +31,7 @@ namespace ToL_Log_Templater
         public static IntPtr WinGetHandle()
         {
             foreach (Process pList in Process.GetProcesses())
-                if (pList.MainWindowTitle.Contains("Throne of Lies"))
+                if ((pList.ProcessName == "ThroneOfLies") && (pList.MainModule.ModuleName == "ThroneOfLies.exe"))
                     return pList.MainWindowHandle;
 
             return IntPtr.Zero;
