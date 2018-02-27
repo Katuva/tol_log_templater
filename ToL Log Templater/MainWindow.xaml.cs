@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -15,7 +14,7 @@ namespace ToL_Log_Templater
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Template> Templates { get; set; }
+        public BindingList<Template> Templates { get; set; }
 
         public MainWindow()
         {
@@ -40,7 +39,7 @@ namespace ToL_Log_Templater
 
         public void LoadTemplates()
         {
-            Templates = new ObservableCollection<Template>();
+            Templates = new BindingList<Template>();
 
             foreach (string file in Directory.EnumerateFiles("templates"))
             {
@@ -148,6 +147,18 @@ namespace ToL_Log_Templater
                 File.Delete(template.Filename);
                 Templates.Remove((Template)cmbTemplates.SelectedItem);
             }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Template template = CheckTemplateSelected();
+
+            if (template == null)
+                return;
+
+            Editor editor = new Editor(template);
+            editor.Owner = this;
+            editor.ShowDialog();
         }
     }
 }

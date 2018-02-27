@@ -16,7 +16,6 @@ To download the latest release, click [here](https://github.com/Katuva/tol_log_t
 
 Roadmap:
 
-- Editing of existing templates.
 - Unicode character selecter/inserter.
 
 ## License

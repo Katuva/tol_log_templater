@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="ToL Log Templater" Height="231.18" Width="470.987" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2D2D30">
-        <ComboBox x:Name="cmbTemplates" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="433" VerticalContentAlignment="Center" ItemsSource="{Binding Path=Templates}" Height="38" FontFamily="{StaticResource Overlock}" FontSize="18"/>
+        <ComboBox x:Name="cmbTemplates" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="433" VerticalContentAlignment="Center" ItemsSource="{Binding Path=Templates, UpdateSourceTrigger=PropertyChanged}" Height="38" FontFamily="{StaticResource Overlock}" FontSize="18"/>
         <Button x:Name="btnPage1" Content="Page 1" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Click="btnPage1_Click"/>
         <Button x:Name="btnPage2" Content="Page 2" HorizontalAlignment="Left" Margin="339,67,0,0" VerticalAlignment="Top" Click="btnPage2_Click"/>
         <Button x:Name="btnNew" Content="New" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Click="btnNew_Click"/>
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="339,142,0,0" VerticalAlignment="Top" Click="btnDelete_Click"/>
-        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="112,81,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
+        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="175,142,0,0" VerticalAlignment="Top" Click="btnEdit_Click"/>
 
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -20,9 +21,28 @@ namespace ToL_Log_Templater
 
         private const int WS_MINIMIZEBOX = 0x20000;
 
+        private Template template;
+        private string oldName;
+
         public Editor()
         {
             InitializeComponent();
+
+            template = new Template();
+
+            DataContext = template;
+        }
+
+        public Editor(Template template)
+        {
+            InitializeComponent();
+
+            this.template = template;
+            oldName = template.Name;
+
+            DataContext = this.template;
+
+            txtTemplateName.IsEnabled = false;
         }
 
         private IntPtr _windowHandle;
@@ -41,23 +61,9 @@ namespace ToL_Log_Templater
             SetWindowLong(_windowHandle, GWL_STYLE, GetWindowLong(_windowHandle, GWL_STYLE) & ~WS_MINIMIZEBOX);
         }
 
-        private void txtTemplateName_GotFocus(object sender, RoutedEventArgs e)
+        private void SaveFile(string filename, bool append = false)
         {
-            txtTemplateName.SelectAll();
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            Guid id = Guid.NewGuid();
-
-            Directory.CreateDirectory("templates");
-
-            using (StreamWriter writer = new StreamWriter("templates/" + id))
+            using (StreamWriter writer = new StreamWriter(filename, append))
             {
                 writer.WriteLine("###NAME_START###");
                 writer.WriteLine(txtTemplateName.Text);
@@ -69,17 +75,45 @@ namespace ToL_Log_Templater
                 writer.WriteLine(txtPage2.Text);
                 writer.WriteLine("###PAGE2_END###");
             }
+        }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
             // This is nasty, temporary until I can be bothered to create proper models/event/mvvm crap.
             var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.Templates.Add(new Template("templates\\" + id.ToString(), txtTemplateName.Text, txtPage1.Text, txtPage2.Text));
+
+            if (template.Filename == null)
+            {
+                template.Filename = "templates\\" + Guid.NewGuid().ToString();
+
+                // yuck
+                mainWindow.Templates.Add(template);
+            }
+            else
+            {
+                // vomits
+                mainWindow.Templates[mainWindow.cmbTemplates.SelectedIndex].Page1 = template.Page1;
+                mainWindow.Templates[mainWindow.cmbTemplates.SelectedIndex].Page2 = template.Page2;
+            }
+
+            Directory.CreateDirectory("templates");
+
+            SaveFile(template.Filename);
 
             this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            txtTemplateName.Focus();
+            if (template.Filename == null)
+                txtTemplateName.Focus();
+            else
+                txtPage1.Focus();
         }
     }
 }
