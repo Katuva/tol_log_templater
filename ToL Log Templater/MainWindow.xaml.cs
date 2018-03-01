@@ -41,6 +41,8 @@ namespace ToL_Log_Templater
         {
             Templates = new BindingList<Template>();
 
+            Directory.CreateDirectory("templates");
+
             foreach (string file in Directory.EnumerateFiles("templates"))
             {
                 string contents = File.ReadAllText(file);

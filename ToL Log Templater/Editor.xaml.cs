@@ -22,7 +22,6 @@ namespace ToL_Log_Templater
         private const int WS_MINIMIZEBOX = 0x20000;
 
         private Template template;
-        private string oldName;
 
         public Editor()
         {
@@ -38,7 +37,6 @@ namespace ToL_Log_Templater
             InitializeComponent();
 
             this.template = template;
-            oldName = template.Name;
 
             DataContext = this.template;
 

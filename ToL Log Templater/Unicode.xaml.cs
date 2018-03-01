@@ -19,18 +19,25 @@ namespace ToL_Log_Templater
 
         private void LoadButtons()
         {
-            string[] lines = File.ReadAllLines("unicode");
-
-            foreach (string line in lines)
+            if (File.Exists("unicode"))
             {
-                Button btnUnicode = new Button();
-                btnUnicode.Content = line.Trim();
-                btnUnicode.Width = 44;
-                btnUnicode.Height = 34;
+                string[] lines = File.ReadAllLines("unicode");
 
-                btnUnicode.Click += UnicodeButton_Click;
+                foreach (string line in lines)
+                {
+                    Button btnUnicode = new Button();
+                    btnUnicode.Content = line.Trim();
+                    btnUnicode.Width = 44;
+                    btnUnicode.Height = 34;
 
-                spContainer.Children.Add(btnUnicode);
+                    btnUnicode.Click += UnicodeButton_Click;
+
+                    spContainer.Children.Add(btnUnicode);
+                }
+            }
+            else
+            {
+                File.CreateText("unicode");
             }
         }
 
